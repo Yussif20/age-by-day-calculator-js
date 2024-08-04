@@ -1,4 +1,5 @@
 const submitButton = document.querySelector(".card__separator--button");
+
 const yearInput = document.querySelector(".card__input[data-name='year']");
 const monthInput = document.querySelector(".card__input[data-name='month']");
 const dayInput = document.querySelector(".card__input[data-name='day']");
@@ -12,6 +13,7 @@ const clearFields = ()=>{
     monthResult.textContent = "--";
     dayResult.textContent = "--";
 }
+
 const calcAge = (year,month,day)=>{
     const birthDate = new Date(year,month-1,day);
     const today = new Date();

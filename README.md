@@ -8,15 +8,9 @@ This is a solution to the [Age calculator app challenge on Frontend Mentor](http
   - [The challenge](#the-challenge)
   - [Screenshot](#screenshot)
   - [Links](#links)
-- [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -40,7 +34,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [github link](https://github.com/Yussif20/age-by-day-calculator-js)
-- Live Site URL: [live site url](https://yussif20.github.io/age-by-day-calculator-js/)
+- Live Site URL: [live site url](https://age-by-day-calculator.netlify.app/)
 
 ## My process
 

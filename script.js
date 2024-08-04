@@ -7,61 +7,75 @@ const yearResult =document.querySelector(".card__result--year");
 const monthResult =document.querySelector(".card__result--month");
 const dayResult =document.querySelector(".card__result--day");
 
-
-
-
 const clearFields = ()=>{
     yearResult.textContent = "--";
     monthResult.textContent = "--";
     dayResult.textContent = "--";
 }
 
-const emptyValidate =(inputElements)=>{
-    let notEmpty =false;
-    inputElements.forEach((el)=>{
-        const parentEl = el.closest(".card__input-container")
-        if(!el.value || el.value ==0){
-            clearFields();
-            parentEl.classList.remove("card__input--invalid")
-            parentEl.classList.add("card__input--empty");
-            notEmpty =false;
-        }else{
-            clearFields();
-            parentEl.classList.remove("card__input--empty")
-            notEmpty = true;
-        }
-    })
-    return notEmpty
+const dataValidate = (year,month, day)=>{
+    let isDataValid = false;
+    if(year == new Date().getFullYear() && month >= new Date().getMonth()+1 && day > new Date().getDate()){
+        document.querySelectorAll(".card__input-container").forEach((el)=>{
+            el.classList.add("card__input--invalid")
+            isDataValid = false
+        })
+    } else{isDataValid =true} 
+    return isDataValid
 }
+
 const dayValidate = (day)=>{
     let isDayValid = false;
-    if(day <= 0 || day > 31){
-        dayInput.closest(".card__input-container").classList.add("card__input--invalid")
+    const parentEl = dayInput.closest(".card__input-container");
+    if(day < 0 || day > 31){
+        parentEl.classList.remove("card__input--empty")
+        parentEl.classList.add("card__input--invalid")
         isDayValid =false
+    }else if(day ==0){
+        parentEl.classList.remove("card__input--invalid")
+        parentEl.classList.add("card__input--empty")
+        isDayValid = false
     }else{
-        dayInput.closest(".card__input-container").classList.remove("card__input--invalid")
+        parentEl.classList.remove("card__input--invalid")
+        parentEl.classList.remove("card__input--empty")
         isDayValid =true;
     }
     return isDayValid;
 }
+
 const monthValidate = (month)=>{
+    const parentEl =  monthInput.closest(".card__input-container");
     let isMonthValid = false;
-    if (month <= 0 || month > 12){
-        monthInput.closest(".card__input-container").classList.add("card__input--invalid")
+    if (month < 0 || month > 12){
+        parentEl.classList.remove("card__input--empty")
+        parentEl.classList.add("card__input--invalid")
         isMonthValid =false
+    }else if(month ==0){
+        parentEl.classList.remove("card__input--invalid")
+        parentEl.classList.add("card__input--empty")
+        isDayValid = false
     }else{
-        monthInput.closest(".card__input-container").classList.remove("card__input--invalid")
+        parentEl.classList.remove("card__input--invalid")
+        parentEl.classList.remove("card__input--empty")
         isMonthValid =true
     }
     return isMonthValid
 }
+
 const yearValidate = (year)=>{
+    const parentEl = yearInput.closest(".card__input-container");
     let isYearValid = false;
     if (year < 1900 || year > new Date().getFullYear()){
-        yearInput.closest(".card__input-container").classList.add("card__input--invalid")
+        parentEl.classList.remove("card__input--empty")
+        parentEl.classList.add("card__input--invalid")
         isYearValid =false
+    }else if(year == 0){
+        parentEl.classList.remove("card__input--invalid")
+        parentEl.classList.add("card__input--empty")
+        isYearValid = false
     }else{
-        yearInput.closest(".card__input-container").classList.remove("card__input--invalid")
+        parentEl.classList.remove("card__input--invalid")
+        parentEl.classList.remove("card__input--empty")
         isYearValid =true
     }
     return isYearValid
@@ -95,16 +109,14 @@ const calcAge = (year,month,day)=>{
     dayResult.textContent = dayDiff;
 }
 const onClickHandler = ()=>{
-    const inputElements = document.querySelectorAll(".card__input")
     const year = yearInput.value
     const month = monthInput.value
     const day = dayInput.value
 
-    if(emptyValidate(inputElements) && dayValidate(day) && monthValidate(month) && yearValidate(year)){
+    if( dayValidate(day) && monthValidate(month) && yearValidate(year) && dataValidate(year,month,day)){
         calcAge(year,month,day)
     }else{
         clearFields()
-        return
     }
 }
 

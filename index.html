@@ -44,7 +44,8 @@
               max="31"
               placeholder="DD"
             />
-            <p class="error-message card__input--error"></p>
+            <p class="error-message error-invalid">please enter a valid day</p>
+            <p class="error-message error-empty">this field is required</p>
           </div>
           <div class="card__input-container">
             <label for="month">Month</label>
@@ -57,7 +58,10 @@
               max="12"
               placeholder="MM"
             />
-            <p class="error-message card__input--error"></p>
+            <p class="error-message error-invalid">
+              please enter a valid month
+            </p>
+            <p class="error-message error-empty">this field is required</p>
           </div>
           <div class="card__input-container">
             <label for="year">Year</label>
@@ -70,7 +74,8 @@
               max="2024"
               placeholder="YYYY"
             />
-            <p class="error-message card__input--error"></p>
+            <p class="error-message error-invalid">please enter a valid year</p>
+            <p class="error-message error-empty">this field is required</p>
           </div>
         </form>
         <div class="card__separator">

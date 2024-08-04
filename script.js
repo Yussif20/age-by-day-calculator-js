@@ -134,3 +134,8 @@ const onClickHandler = ()=>{
 }
 
 submitButton.addEventListener("click",onClickHandler)
+window.addEventListener("keypress",(e)=>{
+    if(e.key ==="Enter"){
+        onClickHandler();
+    }
+})

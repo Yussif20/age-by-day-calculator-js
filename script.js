@@ -18,45 +18,26 @@ const calcAge = ()=>{
 
     const birthDay = birthDate.getDate();
     const currentDay = today.getDate();
-
     const birthMonth =birthDate.getMonth();
     const currentMonth =today.getMonth();
-
     const birthYear = birthDate.getFullYear();
     const currentYear = today.getFullYear();
 
-    const hasCompleteYear = currentDay >= birthDay && currentMonth >= birthMonth;
-    const hasCompleteMonth = currentDay >= birthDay;
-    const dayDifference = currentDay - birthDay;
+    let yearDiff = currentYear - birthYear;
+    let monthDiff = currentMonth - birthMonth;
+    let dayDiff = currentDay - birthDay;
 
-    const ageYears = currentYear-( hasCompleteYear? birthYear: birthYear +1 );
-    //still bug with months calculate
-    const ageMonths = currentMonth - (hasCompleteMonth ? birthMonth : birthMonth);
-    const ageDays = (dayDifference >= 0)? dayDifference : 30 + dayDifference;
-
-    yearResult.textContent = ageYears;
-    monthResult.textContent = ageMonths;
-    dayResult.textContent = ageDays;
-
-
-
-    // const monthDiff = currentMonth - birthMonth;
-    // const dayDiff = currentDay - birthDay;
-    // if(dayDiff>= 0 && monthDiff >= 0){
-    //     const ageMonths = monthDiff;
-    //     const ageDays = dayDiff
-    //     return ageMonths,ageDays;
-
-    // }else if(dayDiff <0 && monthDiff >= 0 ){
-    //     const ageMonths = monthDiff-1;
-    //     const ageDays = 30 + dayDiff
-    // }
-    
-    // monthResult.textContent = ageMonths 
-    // dayResult.textContent = ageDays;
-    // const ageMonths = monthDiff >= 0  ? monthDiff : 12 - birthMonth + currentMonth; 
-    // const ageDays = dayDiff >= 0 ? dayDiff : 30 - birthDay + currentDay;
-    // dayResult.textContent = ageDays;
+    if (dayDiff < 0){
+        monthDiff--;
+        dayDiff = 30 + dayDiff
+    }
+    if(monthDiff < 0){
+        yearDiff --;
+        monthDiff = 12 + monthDiff
+    }
+    yearResult.textContent = yearDiff;
+    monthResult.textContent = monthDiff;
+    dayResult.textContent = dayDiff;
 
 }
 submitButton.addEventListener("click",calcAge)

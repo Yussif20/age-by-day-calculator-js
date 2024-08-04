@@ -12,15 +12,48 @@ const clearFields = ()=>{
     monthResult.textContent = "--";
     dayResult.textContent = "--";
 }
+const calcAge = (year,month,day)=>{
+    const birthDate = new Date(year,month-1,day);
+    const today = new Date();
+
+    const birthDay = birthDate.getDate();
+    const currentDay = today.getDate();
+    const birthMonth =birthDate.getMonth();
+    const currentMonth =today.getMonth();
+    const birthYear = birthDate.getFullYear();
+    const currentYear = today.getFullYear();
+
+    let yearDiff = currentYear - birthYear;
+    let monthDiff = currentMonth - birthMonth;
+    let dayDiff = currentDay - birthDay;
+
+    if (dayDiff < 0){
+        monthDiff--;
+        dayDiff = 30 + dayDiff
+    }
+    if(monthDiff < 0){
+        yearDiff --;
+        monthDiff = 12 + monthDiff
+    }
+    yearResult.textContent = yearDiff;
+    monthResult.textContent = monthDiff;
+    dayResult.textContent = dayDiff;
+}
 
 const dataValidate = (year,month, day)=>{
     let isDataValid = false;
-    if(year == new Date().getFullYear() && month >= new Date().getMonth()+1 && day > new Date().getDate()){
-        document.querySelectorAll(".card__input-container").forEach((el)=>{
+    const inputContainer = document.querySelectorAll(".card__input-container")
+    if(year == new Date().getFullYear() &&( month == new Date().getMonth()+1 && day > new Date().getDate()) || ( month > new Date().getMonth()+1)){
+        inputContainer.forEach((el)=>{
             el.classList.add("card__input--invalid")
-            isDataValid = false
         })
-    } else{isDataValid =true} 
+        isDataValid = false
+    }else{
+        inputContainer.forEach((el)=>{
+            el.classList.remove("card__input--invalid")
+        })
+      isDataValid =true
+    } 
     return isDataValid
 }
 
@@ -81,37 +114,15 @@ const yearValidate = (year)=>{
     return isYearValid
 }
 
-const calcAge = (year,month,day)=>{
-    const birthDate = new Date(year,month-1,day);
-    const today = new Date();
 
-    const birthDay = birthDate.getDate();
-    const currentDay = today.getDate();
-    const birthMonth =birthDate.getMonth();
-    const currentMonth =today.getMonth();
-    const birthYear = birthDate.getFullYear();
-    const currentYear = today.getFullYear();
-
-    let yearDiff = currentYear - birthYear;
-    let monthDiff = currentMonth - birthMonth;
-    let dayDiff = currentDay - birthDay;
-
-    if (dayDiff < 0){
-        monthDiff--;
-        dayDiff = 30 + dayDiff
-    }
-    if(monthDiff < 0){
-        yearDiff --;
-        monthDiff = 12 + monthDiff
-    }
-    yearResult.textContent = yearDiff;
-    monthResult.textContent = monthDiff;
-    dayResult.textContent = dayDiff;
-}
 const onClickHandler = ()=>{
     const year = yearInput.value
     const month = monthInput.value
     const day = dayInput.value
+
+    dayValidate(day)
+    monthValidate(month)
+    yearValidate(year)
 
     if( dayValidate(day) && monthValidate(month) && yearValidate(year) && dataValidate(year,month,day)){
         calcAge(year,month,day)
